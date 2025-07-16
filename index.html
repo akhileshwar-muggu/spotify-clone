@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify-Web Player:Music for everyone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+*{
+   font-family: "Montserrat", sans-serif;
+   margin:0;
+   /* background-color: black; */
+   /* color:#ffffff; */
+   overflow: hidden;
+}
+.main{
+    display: flex;
+    height: 100vh;
+    padding: 0.5rem;
+    background-color: black;
+    color:#fff;
+}
+
+.sidebar{
+    background-color:black;
+    width: 340px;
+    border-radius: 1rem;  /* 1rem=16px */
+    margin-right: 8px;
+}
+
+.main-content{
+    background-color:#121212;
+    flex:1;
+    border-radius: 1rem;
+    overflow:auto;
+    padding:0 1.5rem 0 1.5rem;
+}
+
+.music-player{
+    background-color:black;
+    position:fixed;
+    bottom: 0;
+    height: 70px;
+    width:100%;
+}
+a{
+    text-decoration: none;
+    color:#ffffff
+}
+.nav{
+    background-color:#121212;
+    border-radius:1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height:100px;
+    padding:0.5rem 0.75rem;
+}
+.nav-option{
+    background-color: #121212;
+    line-height: 2.5rem;
+    padding:0.5rem 0.8rem;
+}
+.nav-option i{
+    font-size:1.25rem
+}
+.nav-option a{
+    font-size:1rem;
+    font-weight: 800;
+    margin:0.7rem;
+}
+#search{
+    opacity: 0.5;
+    transition: 0.7s;
+}
+#search:hover{
+    opacity:1;
+}
+.library{
+    background-color: #121212;
+    border-radius: 1rem;
+    height:100%;
+    margin-top:0.35rem;
+    padding:0.5rem 0.8rem;
+}
+.options .library-options{
+    background-color: #121212;
+}
+ .options  .icons i{
+    background-color: #121212;
+} 
+.options{
+    display:flex;
+    background-color: #121212;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+ .icons{
+    display:flex;
+    background-color: #121212;
+} 
+.icons i{
+    font-weight: 600;
+    padding:5px
+}
+.library-options img{
+    height:2rem;
+
+}
+.icons i{
+    padding-left: 10px;
+    opacity:0.5;
+    background-color: #121212;
+}
+.icons i:hover{
+    opacity: 1;
+}
+.box{
+    background-color: #232323;
+    height:8rem;
+    border-radius:0.75rem;
+    margin:10px 0 0 0;
+    padding:1rem 1.25rem;
+}
+.box-p1 {
+    background-color: #232323;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.box-p2{
+    background-color: #232323;
+    font-size: 0.85rem;  
+    opacity: 0.9;  
+    margin-bottom: 13px;
+}
+.badge{
+    background-color: white;
+    border:none;
+    border-radius:100px;
+    padding:0.55rem 1rem;
+    font-weight:700;
+    margin-top: 0.9rem;
+}
+.main-content button i{
+    padding-right: 3px;
+    font-size: large;
+}
+#goke #ok{
+    display:flex;
+    align-items: center;
+}
+.sticky-nav{
+    position:sticky;
+    top:0;
+    background-color:#121212;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    padding:0.3rem 0 0.5rem 0;
+    z-index: 5;
+}
+.sticky-nav-options{
+    /* background-color:blueviolet; */
+    display: flex;
+    align-items: center;
+}
+#koke,#goke{
+    margin:0
+}
+.sticky-nav-icons img{
+    /* height:2rem; */
+    margin:0.35rem;
+}
+.sticky-nav-options{
+    width:350px;
+    display:flex;
+    justify-content: space-between;
+}
+.sticky-nav-options div #id{
+     margin-right:25px; 
+
+}
+.dark-badge{
+    background-color: black;
+    color:#ffffff;
+    border:1px solid white;
+}
+@media(max-width:1000px){
+    .hider{
+        display: none;
+    }
+}
+.card{
+    background-color:rgb(27, 27, 27);
+    transition: 0.7s;
+    width:150px;
+    border-radius:0.5rem;
+    padding:10px;
+    line-height:20px;
+}
+
+.card:hover{
+    background-color:#262626
+
+}
+.cards-container{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top:1rem;
+    row-gap: 10px;
+    
+}
+.cards-container .card{
+    margin-left:1.5rem;
+}
+.card-img{
+    width:100px;
+    width:100%;
+    border-radius:0.5rem;
+}
+.card-title{
+    font-weight: 600;
+    margin-top: 8px;
+}
+.card-info{
+    font-size:0.7rem;
+    opacity: 0.5;
+}
+#h2{
+    margin:10px
+}
+.footer{
+    height:250px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.line{
+    width:90%;
+    height:30%;
+    border-top:1px solid white;
+    opacity: 0.6;
+}
+.music-player{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+.music-player .player-controls-icon{
+    text-align: center;
+}
+
+.album{
+    width:25%;
+    height:100%;
+    display:flex;
+    align-items: center;
+}
+#outdiv{
+    margin-top:9px;
+    margin-left:17px
+}
+#img-album{
+    border-radius: 5px;
+}
+#muna{
+    font-size:14px;
+    font-weight: 500;
+    margin-left: 8px;
+    text-align:center;
+}
+#p{
+    font-size: 0.85rem;  
+    opacity: 0.5;  
+    font-weight:500;
+}
+.player{
+    width:50%;
+    /* background-color: orange; */
+}
+.controls{
+    width:25%;
+    /* background-color: green; */
+}
+.player-controls-icon img{
+    height:1rem;
+    margin-right:10px;
+    margin-left:10px;
+    margin-top: 5px;
+    opacity: 0.6;
+    transition: 0.4s;
+}
+.player-controls-icon img:hover{
+    opacity: 1;
+}
+.playback-bar{
+    text-align: center;
+}
+
+#pp{
+    height:30px;
+    opacity:1;
+}
+#i1,#i2,#i4,#i5{
+    margin-bottom: 5px;
+}
+.progress-bar{
+    width:70%;
+    height:6px;
+    position:relative;
+    bottom: 3px;
+}
+.icomu-pl{
+    margin-left: 5px;
+}
+.icomu-pl i{
+    padding-left: 10px;
+    opacity:0.6;
+    transition:0.4s;
+}
+.icomu-pl i:hover{
+    opacity:1;
+}
+.boxmu{
+    height:20px;
+    width: 20px;
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity:0.7;
+}
+.stbut{
+    font-size: xx-small;
+    opacity: 0.8;
+}
+#po1{
+    height:3px
+}
+
+.controls{
+    display: flex;
+    align-items: center;
+}
+.icomu i{
+    padding-left: 12px;
+    font-size: smaller;
+    padding-top:4px;
+    opacity:0.7;
+}
+.miniprobar{
+    height:6px;
+    width:100px;
+    position:relative;
+    bottom: 4px;
+}
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="sidebar">
+            <div class="nav">
+                <div class="nav-option">
+                    <i class="fa-solid fa-house-chimney"></i>
+                    <a href="#">Home</a>
+                </div> 
+                <div class="nav-option" id="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <a href="#">search</a>
+                </div>
+            </div>
+            <div class="library">
+                <div class="options">
+                    <div class="library-options " id="search">
+                        <img src="library_icon.png"/>
+                        <a href="#">Your Library</a>
+                    </div> 
+                    <div class="icons" >
+                        <i class="fa-solid fa-plus"></i>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div class="lib-box">
+                    <div class="box">
+                        <div class="box-p1">Create your first play list</div>
+                        <div class="box-p2">It's easy we'll help you</div>
+                        <button class="badge">Create playlist</button>
+                    </div>
+                    <div class="box">
+                        <div class="box-p1">Let's find some podcasts to follow</div>
+                        <div class="box-p2">we'll keep you updated on new episodes</div>
+                        <button class="badge">Browse Podcasts</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="sticky-nav">
+                <div class="sticky-nav-icons">
+                    <img src="backward_icon.png" alt="backward_icon">
+                    <img src="forward_icon.png" alt="forward_icon" class="hider">
+                </div>
+                <div class="sticky-nav-options">
+                    <div><button class="badge hider" id="koke">Explore Premium</button></div>
+                    <div><button class="badge dark-badge" id="goke"><div id="ok"><div><i class="fa-regular fa-circle-down" style="margin-right: 2px;"></i></div><div>Install App</div></div></button></div>
+                    <div><i class="fa-regular fa-user" id="id"></i></div>
+                </div>
+            </div>
+            <h1>Resently Player</h1>
+            <div class="cards-container">
+                <div class="card">
+                    <img src="card1img.jpeg" alt="card1img" class="card-img">
+                    <p class="card-title">Top 50-Global</p>
+                    <p class="card-info">Your daily update of the most played track right...</p>
+                </div>
+            </div>
+
+            <h1 id="h2">Trending now near you</h1>
+            <div class="cards-container">
+                <div class="card">
+                    <img src="card2img.jpeg" alt="card1img" class="card-img">
+                    <p class="card-title">Top 50-Global</p>
+                    <p class="card-info">Your daily update of the most played track right...</p>
+                </div>
+                <div class="card">
+                    <img src="card3img.jpeg" alt="card1img" class="card-img">
+                    <p class="card-title">Top 50-Global</p>
+                    <p class="card-info">Your daily update of the most played track right...</p>
+                </div>
+                <div class="card">
+                    <img src="card4img.jpeg" alt="card1img" class="card-img">
+                    <p class="card-title">Top 50-Global</p>
+                    <p class="card-info">Your daily update of the most played track right...</p>
+                </div>
+                <div class="card">
+                    <img src="cardximg.jpeg" alt="card1img" class="card-img">
+                    <p class="card-title">Top 50-Global</p>
+                    <p class="card-info">Your daily update of the most played track right...</p>
+                </div>
+                <div class="card">
+                    <img src="cardzimg.jpeg" alt="card1img" class="card-img">
+                    <p class="card-title">Top 50-Global</p>
+                    <p class="card-info">Your daily update of the most played track right...</p>
+                </div>
+                <div class="card">
+                    <img src="cardyimg.jpeg" alt="card1img" class="card-img">
+                    <p class="card-title">Top 50-Global</p>
+                    <p class="card-info">Your daily update of the most played track right...</p>
+                </div>
+            </div>
+            <h1>Featured Charts</h1>
+            <div class="cards-container">
+                <div class="card">
+                    <img src="card5img.jpeg" alt="card1img" class="card-img">
+                    <p class="card-title">Top Songs-Global</p>
+                    <p class="card-info">Your daily update of the most played track right...</p>
+                </div>
+                <div class="card">
+                    <img src="card6img.jpeg" alt="card1img" class="card-img">
+                    <p class="card-title">Top Songs-India</p>
+                    <p class="card-info">Your daily update of the most played track right...</p>
+                </div>
+                <div class="card">
+                    <img src="card1img.jpeg" alt="card1img" class="card-img">
+                    <p class="card-title">Top 50-Global</p>
+                    <p class="card-info">Your daily update of the most played track right...</p>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="line"></div>
+            </div>
+        </div>
+        <div class="music-player">
+            <div class="album">
+                <div id="outdiv"><img src="cardzimg.jpeg" alt="img" id="img-album" style="height:50px"></div>
+                <div id="muna">Alag Aasmaan <p id="p">Anuv Jain</p> </div>
+                <div class="icomu-pl">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-credit-card"></i>
+                </div>
+            </div>
+            <div class="player">
+                <div class="player-controls-icon">
+                    <img src="player_icon1.png" alt="icon1" id="i1">
+                    <img src="player_icon2.png" alt="icon2" id="i2">
+                    <img src="player_icon3.png" alt="icon3" id="pp">
+                    <img src="player_icon4.png" alt="icon4" id="i4">
+                    <img src="player_icon5.png" alt="icon5" id="i5">
+                </div>
+                <div class="playback-bar">
+                    <span class="curr-tim">00:00</span>
+                    <input type="range" min="0" max="100" class="progress-bar">
+                    <span class="tot-tim">03:33</span>
+                </div>
+                <div id="po1"></div>
+            </div>
+            <div class="controls">
+                <div class="boxmu"><i class="fa-regular fa-circle-play"></i></div>
+                <div class="icomu">
+                    <i class="fa-solid fa-bars"></i>
+                    <i class="fa-solid fa-desktop"></i><i class="fa-solid fa-mobile-screen" style="padding:0"></i>
+                    <i class="fa-solid fa-play"></i>
+                    <input type="range" max="100" min="0" value="20" class="miniprobar">
+                    <i class="fa-regular fa-square" style="font-size: 18px; padding-left: 3px;"></i>
+                    <i class="fa-solid fa-square" style="position:relative; right: 23px; font-size: x-small;"></i>
+                    <i class="fa-solid fa-expand" style="padding: 0; margin: 0;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
